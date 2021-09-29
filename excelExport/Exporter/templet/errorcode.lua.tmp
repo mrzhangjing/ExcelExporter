@@ -1,0 +1,23 @@
+--[[
+>>> 该文件由配置表导出生成，禁止手动修改！！！
+]]
+
+local errors = {}
+
+function errmsg(ec)
+    if not ec then
+        return "nil"
+    end
+    return errors[ec] or ec
+end
+
+local function add(error)
+    assert(errors[error.code] == nil, string.format(
+        "had the same error code[%x], msg[%s]", error.code, error.message))
+    errors[error.code] = error.message
+    return error.code
+end
+
+%ModuleError%
+
+return errors

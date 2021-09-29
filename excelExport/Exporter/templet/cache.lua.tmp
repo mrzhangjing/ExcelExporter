@@ -1,0 +1,32 @@
+--[[
+>>> 该文件由配置表导出生成，禁止手动修改！！！
+]]
+
+local conf = require("skynet.sharedata.corelib")
+local pathprefix = "config."
+local new = function(path)
+	local cobj
+	local ok, msg = pcall(function ()
+		local data = require(pathprefix .. path)
+		cobj = conf.host.new(data)
+		package.loaded[pathprefix .. path] = nil
+	end, debug.traceback)
+	assert(ok, string.format("path:%s msg:%s", path, msg))
+    return cobj
+end
+
+function proxyConfig(origin)
+	for k, v in pairs(origin) do
+		local func = load(v)
+		if func then
+			origin[k] = func()
+		end
+	end
+	return origin
+end
+
+local config 				= {}
+
+%configList%
+
+return config

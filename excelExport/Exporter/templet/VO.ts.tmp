@@ -1,0 +1,10 @@
+/**
+ * 根据配置表自动生成，禁止修改！！！
+ **/
+export default class %VOName% {
+	constructor(data: Array<any>) {
+%initMemberCode%
+	};
+
+%memberCode%
+}

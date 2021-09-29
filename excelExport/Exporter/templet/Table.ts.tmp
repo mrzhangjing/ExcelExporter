@@ -1,0 +1,53 @@
+/**
+ * 根据配置表自动生成，禁止修改！！！
+ */
+
+import ResCtrl from "../common/res/ResCtrl";
+import %ShortName%VO from "./%ShortName%VO";
+
+%TableEnum%
+
+export default class %ShortName%Table {
+    constructor() {
+        const name = "%file_name%";
+        this.initVO(ResCtrl.getInstance().getJson(name));
+    }
+
+	initVO(data: Array<any>): void {
+		for (var i = 0, len = data.length; i < len; i++) {
+			if (i == 0) continue;
+			let VO = new %ShortName%VO(data[i])
+			this.VOList.push(VO)
+			%initKey%
+		}
+	}
+%findByKey%
+
+	VOList: %ShortName%VO[] = [];
+    public findFirst(filter: (VO: %ShortName%VO) => boolean) {
+        for (var i = 0, len = this.VOList.length; i < len; i++) {
+            let VO = this.VOList[i]
+            if (filter(VO)) {
+                return VO
+            }
+        }
+    }
+
+    public findAll(filter: (VO: %ShortName%VO) => boolean) {
+        let list = [];
+        for (var i = 0, len = this.VOList.length; i < len; i++) {
+            let VO = this.VOList[i]
+            if (filter(VO)) {
+                list.push(VO)
+            }
+        }
+        return list
+    }
+
+    public forEach(filter: (VO: %ShortName%VO) => void) {
+        for (var i = 0, len = this.VOList.length; i < len; i++) {
+            let VO = this.VOList[i]
+            filter(VO)
+        }
+    }
+}

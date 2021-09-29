@@ -1,0 +1,20 @@
+/**
+ * 根据配置表自动生成，禁止修改！！！
+ */
+%importCode%
+
+export default class tbl {
+%memberCode%
+
+    constructor() {
+%initMemberCode%
+    }
+
+    public static __instance: tbl = null;
+    static getInstance(): tbl {
+        if (!tbl.__instance) {
+            tbl.__instance = new tbl();
+        }
+        return tbl.__instance;
+    }
+}

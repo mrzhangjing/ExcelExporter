@@ -1,0 +1,9 @@
+/**
+>>> 该文件由配置表导出生成，禁止手动修改！！！
+*/
+
+%ModuleError%
+
+export const ErrorCode = {
+%ErrorList%
+}
